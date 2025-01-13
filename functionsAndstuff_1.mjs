@@ -7,6 +7,22 @@
     Create a function that given an array of integers returns the largers number in the array.
     Do not use any built in functionality, use only basic js.
 */
+console.log("Task 1");
+
+function findLargestNumberInArray(arr) {
+    let largestNumber = arr[0];
+
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > largestNumber) {
+            largestNumber = arr[i];
+        }
+    }
+    
+    return largestNumber;
+}
+
+let test = [4, 7, 55, 1231, 23151, 213, 51, 2312, 215165, 213512, 767434, 23];
+console.log(findLargestNumberInArray(test));
 
 
 
@@ -15,7 +31,32 @@
     The numbers should be unique but not consecutive.
     Do not use any built in functionality for sorting, matching etc. (You may use Random and Math functions)
 */
+addSpacing(1);
+console.log("Task 2");
 
+function generateUniqueNumberArray(n) {
+    let uniqueNumbers = [];
+
+    while (uniqueNumbers.length < n) {
+        let randomNum = Math.floor(Math.random() * 100000) + 1;
+
+        let isUnique = true;
+        for (let i = 0; i < uniqueNumbers.length; i++) {
+            if (uniqueNumbers[i] === randomNum) {
+                isUnique = false;
+                break;
+            }
+        }
+
+        if(isUnique) {
+            uniqueNumbers.push(randomNum);
+        }
+    }
+
+    return uniqueNumbers;
+}
+
+console.log(generateUniqueNumberArray(7));
 
 
 /*  Task 3
@@ -33,6 +74,9 @@
     string: "Hello 123 World"
 
 */
+addSpacing(1);
+console.log("Task 3");
+
 
 
 
@@ -71,5 +115,12 @@
 
 */
 
+//#region Util Function
+function addSpacing(lines = 1) {
+    for (let i = 0; i < lines; i++){
+    console.log("")
+    }
+    }
+//#endregion
 
 
