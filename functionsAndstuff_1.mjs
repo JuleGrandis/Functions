@@ -77,22 +77,87 @@ console.log(generateUniqueNumberArray(7));
 addSpacing(1);
 console.log("Task 3");
 
+function matchPattern(string, pattern) {
+    let stringIndex = 0;
+    let patternIndex = 0;
 
+    while (stringIndex < string.length && patternIndex < pattern.length) {
+        let patternChar = pattern[patternIndex];
+
+        if (patternChar === "*") {
+            if (string[stringIndex] === ' ') {
+                return false;
+            }
+            stringIndex++;
+        } else if (patternChar === 'n') {
+            if (string[stringIndex] < '0' || string[stringIndex] > '9') {
+                return false;
+            }
+            stringIndex++;
+        } else if (patternChar === 's') {
+            if (string[stringIndex] === ' ') {
+                return false;
+            }
+            stringIndex++;
+        } else if (patternChar === '-') {
+            if (string[stringIndex] !== ' ') {
+                return false;
+            }
+            stringIndex++;
+        } else {
+            return false;
+        }
+
+        patternIndex++;
+    }
+    return stringIndex === string.length && patternIndex === pattern.length; 
+}
+
+let pattern = "sssss-nnn-*****";
+let string = "Hello 123 World";
+console.log(matchPattern(string, pattern));
 
 
 
 /*  Task 4
     Create a function that reads an indetermind number of integers from the console and returns the sum of the numbers.
 */
+addSpacing(1);
+console.log("Task 4");
 
+console.log("I am unsure as to how to complete this task. If it is to read and calculate input in terminal, which then outputs the sum, \n I would assume the function would need readline and something like process.stdin. It's only a guess, but that's as far as my brainstorm got.")
 
 
 /*  Task 5
     Create a function that given a string returns the number of words in the string.
     Do not use any built in functionality for splitting strings etc.
 */
+addSpacing(1);
+console.log("Task 5");
 
+function countWords(string) {
+    let wordCounter = 0;
+    let insideWord = false;
 
+    for (let i = 0; i < string.length; i++) {
+        let char = string[i];
+
+        if (char !== ' ') {
+            if (!insideWord) {
+                insideWord = true;
+                wordCounter++;
+            }
+        } else {
+            insideWord = false;
+        }
+    }
+
+    return wordCounter;
+}
+
+let testString = "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.";
+
+console.log(countWords(testString));
 
 /*  Task 6
     Create the functions that given a color value in hex format reutns the RGB and CMYK values .
@@ -114,7 +179,31 @@ console.log("Task 3");
     - You can return multiple values from a function by using {}.
 
 */
+addSpacing(1);
+console.log("Task 6");
 
+function hexConverter(hex) {
+
+    let red = null;
+    let green = null;
+    let blue = null;
+
+    let rRatio = red / 255;
+    let gRatio = green / 255;
+    let bRatio = blue / 255;
+
+    let k = 1 - Math.max(rRatio, gRatio, bRatio);
+    let c = (1 - rRatio - k) / (1 - k) || 0;
+    let m = (1 - gRatio - k) / (1 - k) || 0;
+    let y = (1 - bRatio - k) / (1 - k) || 0;
+
+    return {
+        rgb: { r: red, g: green, b: blue },
+        cmyk: { c: c.toFixed(4), m: m.toFixed(4), y: y.toFixed(4), k: k.toFixed(4) }
+    };
+}
+
+console.log("This is how far I got, I couldn't quite figure out how to get the red/green/blue out. Maybe I could create a helper function within the function?");
 //#region Util Function
 function addSpacing(lines = 1) {
     for (let i = 0; i < lines; i++){
